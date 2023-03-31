@@ -8,8 +8,6 @@ android {
   defaultConfig {
     minSdkVersion 16
     targetSdkVersion 33
-    versionCode version_code
-    versionName version_name
   }
   buildTypes {
     release {
@@ -21,6 +19,7 @@ android {
   publishing {
     singleVariant("release")
   }
+    namespace 'com.pedro.rtplibrary'
 }
 
 afterEvaluate {
