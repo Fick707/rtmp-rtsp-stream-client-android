@@ -107,6 +107,7 @@ public class RtspActivity extends AppCompatActivity
     tvBitrate = findViewById(R.id.tv_bitrate);
     etUrl = findViewById(R.id.et_rtp_url);
     etUrl.setHint(R.string.hint_rtsp);
+    etUrl.setText("rtsp://i.fick707.com:18554/mystream");
     bStartStop = findViewById(R.id.b_start_stop);
     bStartStop.setOnClickListener(this);
     bRecord = findViewById(R.id.b_record);
@@ -235,7 +236,13 @@ public class RtspActivity extends AppCompatActivity
             rtspCamera1.setProtocol(Protocol.UDP);
           }
           String user = etWowzaUser.getText().toString();
+          if(user == null || user.trim().length() == 0){
+            user = "ff";
+          }
           String password = etWowzaPassword.getText().toString();
+          if(password == null || password.trim().length() == 0){
+            password = "GrzYcH4q";
+          }
           if (!user.isEmpty() && !password.isEmpty()) {
             rtspCamera1.setAuthorization(user, password);
           }
