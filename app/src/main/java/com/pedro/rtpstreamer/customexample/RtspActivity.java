@@ -16,6 +16,7 @@
 
 package com.pedro.rtpstreamer.customexample;
 
+import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
@@ -152,11 +153,11 @@ public class RtspActivity extends AppCompatActivity
         (CheckBox) navigationView.getMenu().findItem(R.id.cb_noise_suppressor).getActionView();
     //radiobuttons
     rbTcp = (RadioButton) navigationView.getMenu().findItem(R.id.rb_tcp).getActionView();
-    rbUdp = (RadioButton) navigationView.getMenu().findItem(R.id.rb_udp).getActionView();
+//    rbUdp = (RadioButton) navigationView.getMenu().findItem(R.id.rb_udp).getActionView();
     rgChannel = (RadioGroup) navigationView.getMenu().findItem(R.id.channel).getActionView();
     rbTcp.setChecked(true);
     rbTcp.setOnClickListener(this);
-    rbUdp.setOnClickListener(this);
+//    rbUdp.setOnClickListener(this);
     //spinners
     spResolution = (Spinner) navigationView.getMenu().findItem(R.id.sp_resolution).getActionView();
 
@@ -217,6 +218,18 @@ public class RtspActivity extends AppCompatActivity
         } else {
           item.setIcon(getResources().getDrawable(R.drawable.icon_microphone));
           rtspCamera1.enableAudio();
+        }
+        return true;
+      case R.id.rotation:
+        if(!rtspCamera1.isStreaming()){
+          if(getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+          } else if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+          }
+        } else {
+          Toast.makeText(this, "Can not rotate when streaming.",
+                  Toast.LENGTH_SHORT).show();
         }
         return true;
       default:
@@ -321,12 +334,12 @@ public class RtspActivity extends AppCompatActivity
           rbTcp.setChecked(true);
         }
         break;
-      case R.id.rb_udp:
-        if (rbTcp.isChecked()) {
-          rbTcp.setChecked(false);
-          rbUdp.setChecked(true);
-        }
-        break;
+//      case R.id.rb_udp:
+//        if (rbTcp.isChecked()) {
+//          rbTcp.setChecked(false);
+//          rbUdp.setChecked(true);
+//        }
+//        break;
       default:
         break;
     }

@@ -21,6 +21,12 @@
           android:title="@string/camera"
           app:showAsAction="always"
           />
+      <item
+          android:id="@+id/rotation"
+          android:icon="@drawable/icon_rotation"
+          android:title="@string/rotation"
+          app:showAsAction="always"
+          />
     </menu>
   </item>
 </menu>
